@@ -1,20 +1,17 @@
 import streamlit as st
-
 from modules.nlp import show_nlp_dashboard
 from modules.keystroke import show_keystroke_dashboard
 from modules.health import show_health_dashboard
-# =========================
+
 # CONFIG
-# =========================
 st.set_page_config(
     page_title="Vitara Dashboard",
-    layout="wide"
+    layout="wide",
+    page_icon="🌱"
 )
 
-# =========================
 # SIDEBAR
-# =========================
-st.sidebar.title("Vitara Dashboard")
+st.sidebar.title("🌱 Vitara Dashboard")
 
 dataset = st.sidebar.selectbox(
     "Pilih Dataset",
@@ -25,9 +22,7 @@ dataset = st.sidebar.selectbox(
     ]
 )
 
-# =========================
 # ROUTING
-# =========================
 if dataset == "NLP":
     show_nlp_dashboard()
 

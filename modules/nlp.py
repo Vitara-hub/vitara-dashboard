@@ -7,10 +7,7 @@ import matplotlib.pyplot as plt
 def show_nlp_dashboard():
 
     # LOAD DATA
-    df_epo = pd.read_csv('Dataset/NLP/df_epo_raw.csv')
-    df_llm = pd.read_csv('Dataset/NLP/df_llm_raw.csv')
-
-    df = pd.concat([df_epo, df_llm], ignore_index=True)
+    df = pd.read_csv('https://drive.google.com/uc?id=13plFZrIVLtrR0fd7rZX1wxL4pbYBrkO2')
 
     #LOAD ASSETS
     emotion_colors = {
@@ -30,7 +27,7 @@ def show_nlp_dashboard():
     }
 
     # SIDEBAR FILTER
-    st.sidebar.subheader("NLP Filter")
+    st.sidebar.subheader("Emotion Filter")
 
     selected_emotion = st.sidebar.multiselect(
         "Filter Emotion",
@@ -44,6 +41,7 @@ def show_nlp_dashboard():
     total_data = len(df)
     dominant_emotion = df['emotion_label'].mode()[0]
     avg_stress = round(df['stress_label'].mean(), 2)
+    emotion_percent = (df['emotion_label'].value_counts(normalize=True) * 100).round(1)
 
     col1, col2 = st.columns([5, 1])
 
@@ -68,6 +66,53 @@ def show_nlp_dashboard():
         st.metric("🔥 Average Stress", avg_stress)
 
     st.divider()
+
+    # DYNAMIC INSIGHT
+    with st.container(border=True):
+
+        st.markdown(f"""
+        ### 📌 Insight & Analysis
+
+        - Dominant emotion pada dataset adalah **{dominant_emotion}**
+        - Rata-rata stress score berada di angka **{avg_stress}**
+        - Distribusi emosi terbesar berasal dari label **{dominant_emotion} ({emotion_percent[dominant_emotion]}%)**
+        """)
+
+        # DYNAMIC CONDITION
+        if dominant_emotion == "happy":
+
+            st.success("""
+            Dataset menunjukkan dominasi emosi positif
+            dengan tingkat stress yang relatif rendah.
+            """)
+
+        elif dominant_emotion == "sad":
+
+            st.warning("""
+            Dataset menunjukkan kecenderungan emosi sedih
+            dengan indikasi peningkatan stress emosional.
+            """)
+
+        elif dominant_emotion == "angry":
+
+            st.error("""
+            Dataset menunjukkan dominasi emosi marah
+            yang berkorelasi dengan stress tinggi.
+            """)
+
+        elif dominant_emotion == "anxious":
+
+            st.warning("""
+            Dataset menunjukkan pola kecemasan
+            dengan distribusi stress cukup tinggi.
+            """)
+
+        else:
+
+            st.info("""
+            Dataset didominasi emosi netral
+            dengan pola stress yang stabil.
+            """)
 
     # EMOTION DISTRIBUTION
     emotion_count = df['emotion_label'].value_counts().reset_index()
@@ -130,7 +175,7 @@ def show_nlp_dashboard():
         st.image("assets/anxious.png", width=90)
     
     with col2:
-        text = " ".join(df['text'].astype(str)).lower()
+        text = " ".join(df['clean_text'].astype(str)).lower()
 
         custom_stopwords = {
             'aku', 'saya', 'dan', 'yang', 'orang', 'rumah', 'di rumah',
@@ -165,7 +210,7 @@ def show_nlp_dashboard():
     cols = st.columns(len(emotions))
 
     for i, emotion in enumerate(emotions):
-        sample_text = df[df['emotion_label'] == emotion]['text'].sample(3).tolist()
+        sample_text = df[df['emotion_label'] == emotion]['clean_text'].sample(3).tolist()
 
         with cols[i]:
             st.image(emotion_images[emotion], width=80)
