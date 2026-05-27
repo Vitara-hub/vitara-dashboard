@@ -39,7 +39,7 @@ def show_keystroke_dashboard():
         st.caption("Typing Behavior & Stress Pattern Analysis")
 
     with col2:
-        st.image("Assets/keyboard.png", width=180)
+        st.image("assets/keyboard.png", width=180)
 
     # METRICS
     col1, col2, col3, col4 = st.columns(4)
