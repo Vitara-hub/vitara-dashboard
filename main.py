@@ -18,7 +18,7 @@ dataset = st.sidebar.selectbox(
     [
         "NLP",
         "Keystroke",
-        "Health Scoring"
+        "Sleep Scoring"
     ]
 )
 
@@ -29,5 +29,5 @@ if dataset == "NLP":
 elif dataset == "Keystroke":
     show_keystroke_dashboard()
 
-elif dataset == "Health Scoring":
+elif dataset == "Sleep Scoring":
     show_health_dashboard()
