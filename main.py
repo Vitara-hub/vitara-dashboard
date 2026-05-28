@@ -2,6 +2,7 @@ import streamlit as st
 from modules.nlp import show_nlp_dashboard
 from modules.keystroke import show_keystroke_dashboard
 from modules.health import show_health_dashboard
+from modules.food import show_food_dashboard
 
 # CONFIG
 st.set_page_config(
@@ -18,7 +19,8 @@ dataset = st.sidebar.selectbox(
     [
         "NLP",
         "Keystroke",
-        "Sleep Scoring"
+        "Sleep Scoring",
+        "Food Vision"
     ]
 )
 
@@ -31,3 +33,6 @@ elif dataset == "Keystroke":
 
 elif dataset == "Sleep Scoring":
     show_health_dashboard()
+
+elif dataset == "Food Vision":
+    show_food_dashboard()
