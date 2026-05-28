@@ -10,9 +10,8 @@ import random
 def show_food_dashboard():
 
     # CONFIG
-    sample_url = ("https://drive.google.com/uc?export=download&id=1Xdk2g825z7DpfK8d69q_l7xWA5GCzdkb")
+    sample_url = ("https://drive.google.com/uc?export=download&id=13cGOKB1QZSGctV2VRpDZpzhqqDcw-mVn")
     
-
     sample_zip_path = (
         "Dataset/FoodVision/"
         "foodvision_sample.zip"
