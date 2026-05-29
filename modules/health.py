@@ -74,24 +74,23 @@ def show_health_dashboard():
 
     st.markdown("---")
 
-    st.header("💡 Insight & Analysis")
-
+    # Insight & Analsis
+    st.header(":bulb: Insight & Analysis")
+    
     if len(df_filtered) > 0:
         avg_interruptions = df_filtered['interruptions'].mean()
         max_quality = df_filtered['quality_score'].max()
         min_quality = df_filtered['quality_score'].min()
     
         st.markdown(f"""
-        Pengguna dengan interupsi tidur lebih sedikit cenderung memiliki skor kualitas tidur lebih tinggi.
-        Rata-rata interupsi tidur pengguna berada di angka {avg_interruptions:.1f} kali per malam.
-        Skor kualitas tidur pada data yang difilter berada di rentang {min_quality:.2f} – {max_quality:.2f}.
-        Durasi tidur yang lebih lama tidak selalu menjamin kualitas tidur yang baik jika interupsi masih tinggi.
-        Hutang tidur cenderung meningkat pada pengguna yang sering mengalami gangguan saat tidur.
+        - Pengguna dengan **interupsi tidur lebih sedikit** cenderung memiliki **skor kualitas tidur lebih tinggi**.
+        - Rata-rata interupsi tidur pengguna berada di angka **{avg_interruptions:.1f} kali** per malam.
+        - Skor kualitas tidur pada data yang difilter berada di rentang **{min_quality:.2f} – {max_quality:.2f}**.
+        - Durasi tidur yang lebih lama **tidak selalu menjamin** kualitas tidur yang baik jika interupsi masih tinggi.
+        - Hutang tidur cenderung meningkat pada pengguna yang sering mengalami gangguan saat tidur.
         """)
     else:
-        st.warning("⚠️ Tidak ada data untuk ditampilkan.")
-        
-    st.markdown("---")
+        st.warning(":warning: Tidak ada data untuk ditampilkan.")
 
     # 6. Bagian Visualisasi Grafik
     if len(df_filtered) > 0:
