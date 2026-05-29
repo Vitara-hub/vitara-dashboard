@@ -90,6 +90,8 @@ def show_health_dashboard():
         """)
     else:
         st.warning("⚠️ Tidak ada data untuk ditampilkan.")
+        
+    st.markdown("---")
 
     # 6. Bagian Visualisasi Grafik
     if len(df_filtered) > 0:
